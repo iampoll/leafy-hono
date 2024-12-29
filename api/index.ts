@@ -1,10 +1,10 @@
 import { Hono } from "hono";
-import { v1Router } from "./v1";
+import { serve } from "@hono/node-server";
 import { openAPISpecs } from "hono-openapi";
 import type { JwtVariables } from "hono/jwt";
-import { jwtMiddleware } from "@middleware/auth";
-import { env } from "@lib/env";
-import { apiReference } from "@scalar/hono-api-reference";
+import { jwtMiddleware } from "./middleware/auth";
+import { env } from "./lib/env";
+import { v1Router } from "./v1";
 
 const app = new Hono<{ Variables: JwtVariables }>();
 
@@ -37,29 +37,34 @@ app.get(
   })
 );
 
-app.get(
-  "/api/docs",
-  apiReference({
-    theme: "saturn",
-    spec: { url: "/api/openapi" },
-  })
-);
-
-// For production (Vercel)
-export const config = {
-  runtime: "edge",
+// Initialize API docs
+const initApiDocs = async () => {
+  try {
+    const { apiReference } = await import("@scalar/hono-api-reference");
+    app.get(
+      "/api/docs",
+      apiReference({
+        theme: "saturn",
+        spec: { url: "/api/openapi" },
+      })
+    );
+  } catch (error) {
+    console.error("Failed to load API reference:", error);
+  }
 };
 
+initApiDocs().catch(console.error);
+
 // For local development
-if (env.NODE_ENV !== "production") {
-  const { serve } = require("@hono/node-server");
-  const port = env.PORT || 3000;
-  console.log(`Server is running on port ${port} in ${env.NODE_ENV} mode`);
+if (process.env.NODE_ENV !== "production") {
+  const port = Number(process.env.PORT || 3000);
+  console.log(
+    `Server is running on port ${port} in ${process.env.NODE_ENV} mode`
+  );
   serve({
     fetch: app.fetch,
     port,
   });
 }
 
-// For production (Vercel)
 export default app;
