@@ -1,9 +1,9 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { describeRoute } from "hono-openapi";
-import { registerSchema, loginSchema } from "../schemas/auth";
-import { register, login } from "../controllers/auth.controller";
-import { authDocs } from "../docs/auth.docs";
+import { registerSchema, loginSchema } from "@v1/schemas/auth";
+import { register, login } from "@v1/controllers/auth.controller";
+import { authDocs } from "@v1/docs/auth.docs";
 
 const authRouter = new Hono();
 

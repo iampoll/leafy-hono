@@ -1,6 +1,6 @@
 import { ConvexError } from "convex/values";
 import { Context } from "hono";
-import { isApiError } from "./error";
+import { isApiError } from "@lib/error";
 
 type ControllerFunction = (c: Context) => Promise<Response>;
 

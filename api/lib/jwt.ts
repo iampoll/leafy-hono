@@ -1,7 +1,7 @@
 import { sign } from "hono/jwt";
 
-import { env } from "./env";
-import { Id } from "../../convex/_generated/dataModel";
+import { env } from "@lib/env";
+import { Id } from "@convex/_generated/dataModel";
 
 export const createToken = async (userId: Id<"users">) => {
   const ONE_HOUR = 60 * 60;

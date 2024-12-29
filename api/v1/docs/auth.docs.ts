@@ -1,5 +1,5 @@
-import { errorResponseSchema } from "../schemas";
-import { loginSchema, registerSchema } from "../schemas/auth";
+import { errorResponseSchema } from "@v1/schemas";
+import { loginSchema, registerSchema } from "@v1/schemas/auth";
 
 export const authDocs = {
   register: {

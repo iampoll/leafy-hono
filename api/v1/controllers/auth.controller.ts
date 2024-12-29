@@ -1,12 +1,12 @@
 import { Context } from "hono";
 
-import { api } from "../../../convex/_generated/api";
-import { convexClient } from "../../lib/convex";
+import { api } from "@convex/_generated/api";
 
-import { asyncHandler } from "../../lib/asyncHandler";
-import { hashPassword, comparePasswords } from "../../lib/password";
-import { createToken } from "../../lib/jwt";
-import { createApiError } from "../../lib/error";
+import { convexClient } from "@lib/convex";
+import { asyncHandler } from "@lib/asyncHandler";
+import { hashPassword, comparePasswords } from "@lib/password";
+import { createToken } from "@lib/jwt";
+import { createApiError } from "@lib/error";
 
 export const register = asyncHandler(async (c: Context) => {
   const body = await c.req.json();

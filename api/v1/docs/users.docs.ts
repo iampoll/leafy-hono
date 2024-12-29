@@ -1,5 +1,5 @@
-import { errorResponseSchema } from "../schemas";
-import { getUserResponseSchema } from "../schemas/users";
+import { errorResponseSchema } from "@v1/schemas";
+import { getUserResponseSchema } from "@v1/schemas/users";
 
 export const usersDocs = {
   getUser: {

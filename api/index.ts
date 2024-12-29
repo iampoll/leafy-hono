@@ -1,11 +1,10 @@
-import "./lib/env";
 import { Hono } from "hono";
 import { v1Router } from "./v1";
 import { openAPISpecs } from "hono-openapi";
-import { apiReference } from "@scalar/hono-api-reference";
 import type { JwtVariables } from "hono/jwt";
-import { jwtMiddleware } from "./middleware/auth";
-import { env } from "./lib/env";
+import { jwtMiddleware } from "@middleware/auth";
+import { env } from "@lib/env";
+import { apiReference } from "@scalar/hono-api-reference";
 
 const app = new Hono<{ Variables: JwtVariables }>();
 
