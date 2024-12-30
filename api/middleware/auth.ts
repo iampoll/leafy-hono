@@ -1,7 +1,7 @@
 import { Context, Next } from "hono";
 import { jwt } from "hono/jwt";
 import type { JwtVariables } from "hono/jwt";
-import { env } from "@lib/env";
+import { env } from "../lib/env";
 
 const publicPaths = [
   "/api/v1/login",
